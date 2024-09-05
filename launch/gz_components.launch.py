@@ -88,6 +88,7 @@ def get_launch_descriptions_from_yaml_node(
         "GRP02": "robotiq",
         # "GRP03": "robotiq", Waiting for release
         # https://github.com/PickNikRobotics/ros2_robotiq_gripper/blob/main/robotiq_description/urdf/robotiq_2f_85_macro.urdf.xacro
+        "WCH02": "wibotic_station",
     }
 
     for component in node["components"]:

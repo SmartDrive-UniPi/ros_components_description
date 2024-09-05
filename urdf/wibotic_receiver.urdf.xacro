@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="wibotic_receiver"
+    params="parent_link xyz rpy
+                         namespace:=None
+                          device_namespace:=None">
+
+
+    <xacro:if value="${namespace == 'None'}">
+      <xacro:property name="ns" value="" />
+    </xacro:if>
+    <xacro:unless value="${namespace == 'None'}">
+      <xacro:property name="ns" value="${namespace}/" />
+    </xacro:unless>
+
+    <xacro:if value="${device_namespace == 'None'}">
+      <xacro:property name="device_ns" value="" />
+    </xacro:if>
+    <xacro:unless value="${device_namespace == 'None'}">
+      <xacro:property name="device_ns" value="${device_namespace}/" />
+    </xacro:unless>
+
+    <xacro:if value="${device_namespace == 'None'}">
+      <xacro:property name="prefix" value="" />
+    </xacro:if>
+    <xacro:unless value="${device_namespace == 'None'}">
+      <xacro:property name="prefix" value="${device_namespace}_" />
+    </xacro:unless>
+
+    <joint name="${parent_link.rstrip('_link')}_to_${prefix}wibotic_receiver_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent_link}" />
+      <child link="${prefix}wibotic_receiver_link" />
+
+    </joint>
+
+    <link name="${prefix}wibotic_receiver_link">
+      <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2.0}" />
+        <geometry>
+          <mesh filename="package://ros_components_description/meshes/wibotic_receiver.stl" />
+        </geometry>
+        <material name="Grey">
+          <color rgba="0.15 0.15 0.15 1.0" />
+        </material>
+      </visual>
+
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2.0}" />
+        <geometry>
+          <mesh filename="package://ros_components_description/meshes/wibotic_receiver.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+  </xacro:macro>
+</robot>

@@ -268,6 +268,20 @@
         />
       </xacro:if>
 
+      <xacro:if value="${type == 'WCH01'}">
+        <xacro:include
+          filename="$(find ros_components_description)/urdf/wibotic_receiver.urdf.xacro"
+          ns="wireless_charger" />
+
+        <xacro:wireless_charger.wibotic_receiver
+          parent_link="${parent_link}"
+          xyz="${xyz}"
+          rpy="${rpy}"
+          namespace="${ns}"
+          device_namespace="${device_namespace}"
+        />
+      </xacro:if>
+
       <xacro:if value="${index}">
         <xacro:load_componenet
           counter="${index}"
