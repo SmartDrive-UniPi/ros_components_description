@@ -25,32 +25,44 @@ from ament_index_python.packages import get_package_share_directory
 ros_components_description = get_package_share_directory("ros_components_description")
 xacro_path = os.path.join(ros_components_description, "test/component.urdf.xacro")
 
-# Type: [model_link, link_name, sensor_link_name, sensor_name]
+# Type: [device_namespace, link_name, sensor_link_name, sensor_name, default_device_namespace]
 components_types_with_names = {
-    "LDR01": ["slamtec_rplidar_s1", "laser", "laser", "slamtec_rplidar_sensor"],
-    "LDR06": ["slamtec_rplidar_s3", "laser", "laser", "slamtec_rplidar_sensor"],
-    "LDR10": ["ouster_os0_32", "os_lidar", "os_lidar", "ouster_os0_32_sensor"],
-    "LDR11": ["ouster_os0_64", "os_lidar", "os_lidar", "ouster_os0_64_sensor"],
-    "LDR12": ["ouster_os0_128", "os_lidar", "os_lidar", "ouster_os0_128_sensor"],
-    "LDR13": ["ouster_os1_32", "os_lidar", "os_lidar", "ouster_os1_32_sensor"],
-    "LDR14": ["ouster_os1_64", "os_lidar", "os_lidar", "ouster_os1_64_sensor"],
-    "LDR15": ["ouster_os1_128", "os_lidar", "os_lidar", "ouster_os1_128_sensor"],
-    "LDR20": ["velodyne_puck", "velodyne", "velodyne", "velodyne_puck_sensor"],
-    "CAM01": ["orbbec_astra", "link", "link", "orbbec_astra_color"],
-    "CAM03": ["zed2", "center", "center_optical_frame", "stereolabs_zed_depth"],
-    "CAM04": ["zed2i", "center", "center_optical_frame", "stereolabs_zed_depth"],
-    "CAM06": ["zedi", "center", "center_optical_frame", "stereolabs_zed_depth"],
-    "MAN01": ["ur3e", "base_link", "", ""],
-    "MAN02": ["ur5e", "base_link", "", ""],
-    # "MAN03": ["kinova_lite",               "base_link",    "",         ""], use_isaac error
-    "MAN04": ["kinova_gen3_6dof", "base_link", "", ""],
-    "MAN05": ["kinova_gen3_6dof", "base_link", "camera_color_frame", "camera_sensor"],
-    "MAN06": ["kinova_gen3_7dof", "base_link", "", ""],
-    "MAN07": ["kinova_gen3_7dof", "base_link", "camera_color_frame", "camera_sensor"],
+    "LDR01": ["slamtec_rplidar_s1", "laser", "laser", "slamtec_rplidar_sensor", ""],
+    "LDR06": ["slamtec_rplidar_s3", "laser", "laser", "slamtec_rplidar_sensor", ""],
+    "LDR10": ["ouster_os0_32", "os_lidar", "os_lidar", "ouster_os0_32_sensor", ""],
+    "LDR11": ["ouster_os0_64", "os_lidar", "os_lidar", "ouster_os0_64_sensor", ""],
+    "LDR12": ["ouster_os0_128", "os_lidar", "os_lidar", "ouster_os0_128_sensor", ""],
+    "LDR13": ["ouster_os1_32", "os_lidar", "os_lidar", "ouster_os1_32_sensor", ""],
+    "LDR14": ["ouster_os1_64", "os_lidar", "os_lidar", "ouster_os1_64_sensor", ""],
+    "LDR15": ["ouster_os1_128", "os_lidar", "os_lidar", "ouster_os1_128_sensor", ""],
+    "LDR20": ["velodyne_puck", "velodyne", "velodyne", "velodyne_puck_sensor", ""],
+    "CAM01": ["orbbec_astra", "link", "link", "orbbec_astra_color", "camera"],
+    "CAM03": ["zed2", "center", "center_optical_frame", "stereolabs_zed_depth", "zed"],
+    "CAM04": ["zed2i", "center", "center_optical_frame", "stereolabs_zed_depth", "zed"],
+    "CAM06": ["zedi", "center", "center_optical_frame", "stereolabs_zed_depth", "zed"],
+    "MAN01": ["ur3e", "base_link", "", "", ""],
+    "MAN02": ["ur5e", "base_link", "", "", ""],
+    # "MAN03": ["kinova_lite",               "base_link",    "",         "",""], use_isaac error
+    "MAN04": ["kinova_gen3_6dof", "base_link", "", "", ""],
+    "MAN05": [
+        "kinova_gen3_6dof",
+        "base_link",
+        "camera_color_frame",
+        "camera_sensor",
+        "kinova_gen3_6dof",
+    ],
+    "MAN06": ["kinova_gen3_7dof", "base_link", "", "", ""],
+    "MAN07": [
+        "kinova_gen3_7dof",
+        "base_link",
+        "camera_color_frame",
+        "camera_sensor",
+        "kinova_gen3_7dof",
+    ],
     # "GRP01": [], not implemented in robotiq_description
-    "GRP02": ["robotiq", "robotiq_85_base_link", "", ""],
-    # "GRP03": ["robotiq", "robotiq_140_base_link", "", ""], not implemented in robotiq_description,
-    "WCH01": ["wibotic_receiver", "wibotic_receiver_link", "", ""],
+    "GRP02": ["robotiq", "robotiq_85_base_link", "", "", ""],
+    # "GRP03": ["robotiq", "robotiq_140_base_link", "", "", ""], not implemented in robotiq_description,
+    "WCH01": ["wibotic_receiver", "wibotic_receiver_link", "", "", ""],
 }
 
 
@@ -73,20 +85,25 @@ class ComponentsYamlParseUtils:
         xyz="0.0 0.0 0.0",
         rpy="0.0 0.0 0.0",
     ) -> dict:
-        return {
+        component = {
             "type": type,
             "parent_link": parent_link,
             "xyz": xyz,
             "rpy": rpy,
-            "device_namespace": device_namespace,
         }
+
+        if device_namespace != "":
+            component["device_namespace"] = device_namespace
+
+        return component
 
     def does_urdf_parse(self) -> bool:
         try:
             self._urdf = xacro.process_file(
                 xacro_path, mappings={"components_config_path": self.components_config_path}
             )
-        except xacro.XacroException:
+        except xacro.XacroException as e:
+            print(f"XacroException: {e}")
             return False
         return True
 
@@ -116,11 +133,23 @@ class ComponentsYamlParseUtils:
         link_name = names[1]
         sensor_link_name = names[2]
         sensor_name = names[3]
+        default_device_namespace = names[4]
 
-        device_namespace = component["device_namespace"]
-        namespaced_link_name = device_namespace + "_" + link_name
-        namespaced_sensor_link_name = device_namespace + "_" + sensor_link_name
-        namespaced_sensor_name = device_namespace + "_" + sensor_name
+        namespaced_link_name = link_name
+        namespaced_sensor_link_name = sensor_link_name
+        namespaced_sensor_name = sensor_name
+
+        device_namespace = ""
+        if "device_namespace" in component:
+            device_namespace = component["device_namespace"]
+
+        if device_namespace == "":
+            device_namespace = default_device_namespace
+
+        if device_namespace != "":
+            namespaced_link_name = device_namespace + "_" + namespaced_link_name
+            namespaced_sensor_link_name = device_namespace + "_" + namespaced_sensor_link_name
+            namespaced_sensor_name = device_namespace + "_" + namespaced_sensor_name
 
         if self.does_urdf_parse() != expected_result[0]:
             assert (
@@ -130,7 +159,7 @@ class ComponentsYamlParseUtils:
         if self.does_link_exist(self._urdf, namespaced_link_name) != expected_result[1]:
             assert (
                 False
-            ), f"Link name: {namespaced_link_name}. Expected result {expected_result[1]} with file {components_config_path} and component {component_name}."
+            ), f"Link name: {namespaced_link_name}. Expected result {expected_result[1]} with file {components_config_path} and component {component_name} for this urdf {self._urdf.toprettyxml()}."
 
         if (
             names[2] != ""
@@ -141,18 +170,21 @@ class ComponentsYamlParseUtils:
         ):
             assert (
                 False
-            ), f"Sensor name: {namespaced_sensor_name}, sensor link name: {namespaced_sensor_link_name}. Expected result {expected_result[2]} with file {components_config_path} and component {component_name}."
+            ), f"Sensor name: {namespaced_sensor_name}, sensor link name: {namespaced_sensor_link_name}. Expected result {expected_result[2]} with file {components_config_path} and component {component_name} for this urdf ."
 
 
 def test_all_good_single_components(tmpdir_factory):
     for type_name, value in components_types_with_names.items():
-        name = value[0]
-        dir = tmpdir_factory.mktemp(name)
-        components_config_path = dir.join(name + "_test_components.yaml")
+        device_namespace = value[0]
+        dir = tmpdir_factory.mktemp(device_namespace)
+        components_config_path = dir.join(device_namespace + "_test_components.yaml")
 
         utils = ComponentsYamlParseUtils(str(components_config_path))
         components = {
-            "components": [utils.create_component(type_name, name)],
+            "components": [
+                utils.create_component(type_name, device_namespace),
+                utils.create_component(type_name, ""),
+            ],
         }
 
         utils.save_yaml(components)
