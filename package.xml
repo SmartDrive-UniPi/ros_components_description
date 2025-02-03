@@ -18,6 +18,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <!-- <depend>kortex_description</depend> -->
+  <depend>depthai_descriptions</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">nav2_common</depend>
   <depend>robot_state_publisher</depend>
