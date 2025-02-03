@@ -127,7 +127,6 @@
         <update_rate>20.0</update_rate>
 
         <topic>${ns}${device_namespace}/ouster/points</topic>
-        <frame_id>${ns}${prefix}os_lidar</frame_id>
         <gz_frame_id>${ns}${prefix}os_lidar</gz_frame_id>
         <always_on>true</always_on>
       </sensor>

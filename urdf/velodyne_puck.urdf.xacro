@@ -84,7 +84,6 @@
         </ray>
 
         <topic>${ns}${device_namespace}/velodyne_points</topic>
-        <frame_id>${ns}${prefix}velodyne</frame_id>
         <gz_frame_id>${ns}${prefix}velodyne</gz_frame_id>
         <always_on>true</always_on>
       </sensor>
