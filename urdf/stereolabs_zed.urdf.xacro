@@ -21,17 +21,14 @@
   <xacro:property name="M_PI" value="3.1415926535897931" />
 
   <xacro:macro name="zed_camera"
-    params="parent_link xyz rpy
-    model:=zed
-    namespace:=None
-    device_namespace:=zed">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       model:=zed
+                       namespace:=''
+                       device_namespace:=zed">
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
 
     <xacro:if value="${model == 'zed'}">
       <xacro:property name="baseline" value="0.12" />

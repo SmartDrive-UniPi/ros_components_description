@@ -36,11 +36,11 @@ To include the sensor, use the following code:
 A list of parameters can be found here:
 
 - `parent_link` [*string*, default: **None**] parent link to which sensor should be attached.
-- `xyz` [*float list*, default: **None**] 3 float values defining translation between base of a sensor and parent link. Values in **m**.
-- `rpy` [*float list*, default: **None**] 3 float values define rotation between parent link and base of a sensor. Values in **rad**.
-- `namespace` [*string*, default: **None**] global namespace common to the entire robot.
-- `device_namespace` [*string*, default: **None**] local namespace allowing to distinguish two identical devices from each other.
+- `xyz` [*float list*, default: **0.0 0.0 0.0**] 3 float values defining translation between base of a sensor and parent link. Values in **m**.
+- `rpy` [*float list*, default: **0.0 0.0 0.0**] 3 float values define rotation between parent link and base of a sensor. Values in **rad**.
+- `namespace` [*string*, default: **''**] global namespace common to the entire robot.
+- `device_namespace` [*string*, default: **''**] local namespace allowing to distinguish two identical devices from each other.
 
-- `model` [*string*, default: **None**] model argument that appears when you want to load the appropriate model from a given manufacturer.
+- `model` [*string*, default: **''**] model argument that appears when you want to load the appropriate model from a given manufacturer.
 
 Some sensors can define their specific parameters. Refer to their definition for more info.

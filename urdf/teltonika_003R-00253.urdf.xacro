@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:macro
-    name="teltonika_003R-00253"
-    params="parent_link xyz rpy
-            namespace:=None
-            device_namespace:=gps">
+  <xacro:macro name="teltonika_003R-00253"
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       namespace:=''
+                       device_namespace:=gps">
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
 
     <joint name="${parent_link.rstrip('_link')}_to_antenna_joint"
       type="fixed">

@@ -29,10 +29,7 @@ from launch.substitutions import EnvironmentVariable, LaunchConfiguration
 
 def get_value(node: yaml.Node, key: str):
     try:
-        value = node[key]
-        if value == "None":
-            value = ""
-        return value
+        return node[key]
 
     except KeyError:
         return ""
@@ -115,7 +112,7 @@ def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration("namespace").perform(context)
 
     components_config = None
-    if components_config_path == "None":
+    if components_config_path == "":
         return []
 
     with open(os.path.join(components_config_path)) as file:
@@ -133,7 +130,7 @@ def launch_setup(context, *args, **kwargs):
 def generate_launch_description():
     declare_components_config_path_arg = DeclareLaunchArgument(
         "components_config_path",
-        default_value="None",
+        default_value="",
         description=(
             "Additional components configuration file. Components described in this file "
             "are dynamically included in Panther's urdf."

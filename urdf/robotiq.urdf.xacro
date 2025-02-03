@@ -18,22 +18,18 @@
 
 <robot name="robotiq" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="robotiq"
-    params="parent_link xyz rpy
-            robotiq_type:=2f_85
-            namespace:=None
-            device_namespace:=None
-          ">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       robotiq_type:=2f_85
+                       namespace:=''
+                       device_namespace:=''">
 
     <xacro:include
       filename="$(find robotiq_description)/urdf/robotiq_${robotiq_type}_macro.urdf.xacro"
       ns="gripper" />
 
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <xacro:gripper.robotiq_gripper name="${device_namespace}robotiq_${robotiq_type}"
       prefix="${prefix}"

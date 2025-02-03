@@ -18,21 +18,15 @@
 
 <robot name="ur" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="ur"
-    params="parent_link xyz rpy
-          device_namespace:=None
-          ur_type:=ur3e">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       device_namespace:=''
+                       ur_type:=ur3e">
 
-    <xacro:include
-      filename="$(find ur_description)/urdf/ur_macro.xacro"
-      ns="ur_manipulator"
-    />
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" ns="ur_manipulator" />
 
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <xacro:property name="joint_limit_params"
       value="$(find ur_description)/config/${ur_type}/joint_limits.yaml" scope="parent" />
@@ -57,8 +51,6 @@
       kinematics_parameters_file="${kinematics_params}"
       physical_parameters_file="${physical_params}"
       visual_parameters_file="${visual_params}"
-      sim_ignition="true"
-      generate_ros2_control_tag="false"
     >
       <origin xyz="${xyz}" rpy="${rpy}" />
     </xacro:ur_manipulator.ur_robot>

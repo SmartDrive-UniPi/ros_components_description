@@ -23,14 +23,11 @@
   <xacro:arg name="apriltag_size" default="0.07" />
 
   <xacro:macro name="wibotic_station"
-    params="device_namespace:=None parent_link xyz rpy">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'">
 
-    <xacro:if value="${device_namespace == 'None'}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == 'None'}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <joint name="${parent_link.rstrip('_link')}_to_${prefix}wibotic_station_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
@@ -80,14 +77,9 @@
   </xacro:macro>
 
   <xacro:macro name="create_apriltag"
-    params="name size:=$(arg apriltag_size) device_namespace:=None">
+    params="name size:=$(arg apriltag_size) device_namespace:=''">
 
-    <xacro:if value="${device_namespace == 'None'}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == 'None'}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
 
     <link name="${prefix}${name}_link">

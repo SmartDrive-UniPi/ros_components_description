@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="create_components"
-    params="components_config_path namespace">
-
-    <xacro:unless value="${components_config_path == 'None'}">
-      <xacro:property name="components_config"
+  <xacro:macro name="create_components" params="components_config_path namespace:=''">
+    <xacro:unless value="${components_config_path == ''}">
+      <xacro:property
+        name="components_config"
         value="${xacro.load_yaml(components_config_path)}" />
       <xacro:load_componenet
         config="${components_config}"
         counter="${len(components_config['components'])}"
         robot_namespace="${namespace}" />
-
     </xacro:unless>
   </xacro:macro>
 
-  <xacro:macro name="load_componenet"
-    params="config counter robot_namespace">
+  <xacro:macro name="load_componenet" params="config counter robot_namespace:=''">
     <xacro:if value="${counter}">
       <xacro:property name="index" value="${counter - 1}" scope="parent" />
       <xacro:property name="component" value="${config['components'][index]}" scope="parent" />
@@ -25,21 +22,8 @@
       <xacro:property name="parent_link" value="${component['parent_link']}" scope="parent" />
       <xacro:property name="xyz" value="${component['xyz']}" scope="parent" />
       <xacro:property name="rpy" value="${component['rpy']}" scope="parent" />
-
-      <xacro:if value="${robot_namespace == ''}">
-        <xacro:property name="ns" value="None" scope="parent" />
-      </xacro:if>
-      <xacro:unless value="${robot_namespace == ''}">
-        <xacro:property name="ns" value="${robot_namespace}" scope="parent" />
-      </xacro:unless>
-
-      <xacro:if value="${'device_namespace' in component}">
-        <xacro:property name="device_namespace" value="${component['device_namespace']}" scope="parent" />
-      </xacro:if>
-      <xacro:unless value="${'device_namespace' in component}">
-        <xacro:property name="device_namespace" value="" scope="parent" />
-      </xacro:unless>
-
+      <xacro:property name="ns" value="${robot_namespace}" scope="parent" />
+      <xacro:property name="device_ns" value="${component['device_namespace'] if 'device_namespace' in component else ''}" scope="parent" />
 
       <xacro:if value="${type == 'ANT02'}">
         <xacro:include
@@ -51,7 +35,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
         />
       </xacro:if>
 
@@ -60,8 +44,8 @@
           filename="$(find ros_components_description)/urdf/orbbec_astra.urdf.xacro"
           ns="camera" />
 
-        <xacro:if value="${device_namespace == ''}">
-          <xacro:property name="device_namespace" value="camera" scope="parent" />
+        <xacro:if value="${device_ns == ''}">
+          <xacro:property name="device_ns" value="camera" scope="parent" />
         </xacro:if>
 
         <xacro:camera.orbbec_astra
@@ -69,7 +53,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
         />
       </xacro:if>
 
@@ -85,8 +69,8 @@
           filename="$(find ros_components_description)/urdf/stereolabs_zed.urdf.xacro"
           ns="camera" />
 
-        <xacro:if value="${device_namespace == ''}">
-          <xacro:property name="device_namespace" value="zed" scope="parent" />
+        <xacro:if value="${device_ns == ''}">
+          <xacro:property name="device_ns" value="zed" scope="parent" />
         </xacro:if>
 
         <xacro:camera.zed_camera
@@ -94,7 +78,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           model="${zed_models_dict[type]}"
         />
       </xacro:if>
@@ -116,7 +100,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           model="${rplidar_models_dict[type]}"
         />
       </xacro:if>
@@ -141,7 +125,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           model="${ouster_models_dict[type]}"
         />
       </xacro:if>
@@ -157,7 +141,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
         />
       </xacro:if>
 
@@ -171,7 +155,7 @@
           parent_link="${parent_link}"
           xyz="${xyz}"
           rpy="${rpy}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           ur_type="ur3e"
         />
       </xacro:if>
@@ -186,7 +170,7 @@
           parent_link="${parent_link}"
           xyz="${xyz}"
           rpy="${rpy}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           ur_type="ur5e"
         />
       </xacro:if>
@@ -203,7 +187,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           kinova_type="gen3"
           dof="6"
           gripper="robotiq_2f_85"
@@ -222,7 +206,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           kinova_type="gen3"
           dof="6"
           gripper="robotiq_2f_85"
@@ -241,7 +225,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           kinova_type="gen3"
           dof="7"
           gripper="robotiq_2f_85"
@@ -264,7 +248,7 @@
           dof="7"
           gripper="robotiq_2f_85"
           vision="true"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
         />
       </xacro:if>
 
@@ -277,7 +261,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
           robotiq_type="2f_85"
         />
       </xacro:if>
@@ -292,7 +276,7 @@
           xyz="${xyz}"
           rpy="${rpy}"
           namespace="${ns}"
-          device_namespace="${device_namespace}"
+          device_namespace="${device_ns}"
         />
       </xacro:if>
 

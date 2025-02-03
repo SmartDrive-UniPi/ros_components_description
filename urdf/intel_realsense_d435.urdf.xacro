@@ -19,17 +19,14 @@
 
 <robot name="intel_realsense_d435" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="intel_realsense_d435"
-    params="parent_link xyz rpy
-            use_nominal_extrinsics:=false
-            namespace:=None
-            device_namespace:=camera">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       use_nominal_extrinsics:=false
+                       namespace:=''
+                       device_namespace:=camera">
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-        <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
 
     <!-- The following values are approximate, and the camera node
       publishing TF values with actual calibrated camera extrinsic values -->

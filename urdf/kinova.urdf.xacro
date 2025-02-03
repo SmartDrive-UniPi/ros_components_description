@@ -18,33 +18,23 @@
 
 <robot name="kinova" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="kinova"
-    params="parent_link xyz rpy
-          kinova_type:=gen3_lite
-          dof:=6
-          gripper:=''
-          vision:=false
-          namespace:=None
-          device_namespace:=None
-          ">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       kinova_type:=gen3_lite
+                       dof:=6
+                       gripper:=''
+                       vision:=false
+                       namespace:=''
+                       device_namespace:=''">
 
     <xacro:include
       filename="$(find kortex_description)/robots/kortex_robot.xacro"
       ns="kinova_manipulator"
     />
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
-
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <!-- robot name parameter -->
     <xacro:property name="name" value="kinova_arm" />

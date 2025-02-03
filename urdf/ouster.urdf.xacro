@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="ouster"
-               params="parent_link xyz rpy
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
                        model:=os1_32
-                       namespace:=None
-                       device_namespace:=None">
+                       namespace:=''
+                       device_namespace:=''">
 
     <xacro:if value="${model == 'os0_32'}">
       <xacro:property name="vfov" value="${radians(90.0)}" scope="parent" />
@@ -48,26 +50,8 @@
       <xacro:property name="mesh" value="ouster_os01" scope="parent"/>
     </xacro:if>
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
-
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="device_ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="device_ns" value="${device_namespace}/" />
-    </xacro:unless>
-
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <joint name="${parent_link.rstrip('_link')}_to_${prefix}ouster_${model}_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
@@ -142,7 +126,7 @@
 
         <update_rate>20.0</update_rate>
 
-        <topic>${ns}${device_ns}ouster/points</topic>
+        <topic>${ns}${device_namespace}/ouster/points</topic>
         <frame_id>${ns}${prefix}os_lidar</frame_id>
         <gz_frame_id>${ns}${prefix}os_lidar</gz_frame_id>
         <always_on>true</always_on>

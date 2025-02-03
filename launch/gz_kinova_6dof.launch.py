@@ -36,15 +36,15 @@ def fix_depth_image_tf(context, *args, **kwargs):
     if device_namespace == "":
         device_namespace_ext = ""
 
-    tf_prefix_ext = device_namespace + "_"
+    prefix = device_namespace + "_"
     if device_namespace == "":
-        tf_prefix_ext = ""
+        prefix = ""
 
-    parent_frame = tf_prefix_ext + device_namespace + "_depth_optical_frame"
+    parent_frame = prefix + device_namespace + "_depth_optical_frame"
     child_frame = (
         "panther/base_link//"
         + device_namespace_ext
-        + tf_prefix_ext
+        + prefix
         + device_namespace
         + "_orbbec_astra_depth"
     )

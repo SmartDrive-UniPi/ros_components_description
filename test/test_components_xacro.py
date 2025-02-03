@@ -43,22 +43,22 @@ components_types_with_names = {
     "MAN01": ["ur3e", "base_link", "", "", ""],
     "MAN02": ["ur5e", "base_link", "", "", ""],
     # "MAN03": ["kinova_lite",               "base_link",    "",         "",""], use_isaac error
-    "MAN04": ["kinova_gen3_6dof", "base_link", "", "", ""],
-    "MAN05": [
-        "kinova_gen3_6dof",
-        "base_link",
-        "camera_color_frame",
-        "camera_sensor",
-        "kinova_gen3_6dof",
-    ],
-    "MAN06": ["kinova_gen3_7dof", "base_link", "", "", ""],
-    "MAN07": [
-        "kinova_gen3_7dof",
-        "base_link",
-        "camera_color_frame",
-        "camera_sensor",
-        "kinova_gen3_7dof",
-    ],
+    # "MAN04": ["kinova_gen3_6dof", "base_link", "", "", ""],
+    # "MAN05": [
+    #     "kinova_gen3_6dof",
+    #     "base_link",
+    #     "camera_color_frame",
+    #     "camera_sensor",
+    #     "kinova_gen3_6dof",
+    # ],
+    # "MAN06": ["kinova_gen3_7dof", "base_link", "", "", ""],
+    # "MAN07": [
+    #     "kinova_gen3_7dof",
+    #     "base_link",
+    #     "camera_color_frame",
+    #     "camera_sensor",
+    #     "kinova_gen3_7dof",
+    # ],
     # "GRP01": [], not implemented in robotiq_description
     "GRP02": ["robotiq", "robotiq_85_base_link", "", "", ""],
     # "GRP03": ["robotiq", "robotiq_140_base_link", "", "", ""], not implemented in robotiq_description,

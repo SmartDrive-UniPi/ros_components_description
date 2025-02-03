@@ -1,30 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="velodyne_puck"
-               params="parent_link xyz rpy
-                       namespace:=None
-                       device_namespace:=None">
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       namespace:=''
+                       device_namespace:=''">
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
-
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="device_ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="device_ns" value="${device_namespace}/" />
-    </xacro:unless>
-
-    <xacro:if value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="" />
-    </xacro:if>
-    <xacro:unless value="${device_namespace == ''}">
-      <xacro:property name="prefix" value="${device_namespace}_" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
+    <xacro:property name="prefix" value="${device_namespace + '_' if device_namespace != '' else ''}" />
 
     <joint name="${parent_link.rstrip('_link')}_to_${prefix}velodyne_puck_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
@@ -99,7 +83,7 @@
           </noise>
         </ray>
 
-        <topic>${ns}${device_ns}velodyne_points</topic>
+        <topic>${ns}${device_namespace}/velodyne_points</topic>
         <frame_id>${ns}${prefix}velodyne</frame_id>
         <gz_frame_id>${ns}${prefix}velodyne</gz_frame_id>
         <always_on>true</always_on>
