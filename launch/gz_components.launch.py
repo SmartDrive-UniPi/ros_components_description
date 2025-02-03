@@ -48,12 +48,18 @@ def get_launch_description(name: str, package: str, namespace: str, component: y
         if len(device_namespace) and device_namespace[0] != "/":
             device_namespace = "/" + device_namespace
 
+    gz_bridge_name_prefix = component["type"] + "_gz_bridge"
+    device_namespace_prefix = get_value(component, "device_namespace")
+
+    if device_namespace_prefix != "":
+        gz_bridge_name_prefix = device_namespace_prefix + "_" + gz_bridge_name_prefix
+
     return IncludeLaunchDescription(
         PythonLaunchDescriptionSource([package, "/launch/gz_", name, ".launch.py"]),
         launch_arguments={
             "robot_namespace": robot_namespace,
             "device_namespace": device_namespace,
-            "gz_bridge_name": component["device_namespace"] + "_gz_bridge",
+            "gz_bridge_name": gz_bridge_name_prefix,
         }.items(),
     )
 

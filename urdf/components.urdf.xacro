@@ -25,8 +25,6 @@
       <xacro:property name="parent_link" value="${component['parent_link']}" scope="parent" />
       <xacro:property name="xyz" value="${component['xyz']}" scope="parent" />
       <xacro:property name="rpy" value="${component['rpy']}" scope="parent" />
-      <xacro:property name="device_namespace" value="${component['device_namespace']}"
-        scope="parent" />
 
       <xacro:if value="${robot_namespace == ''}">
         <xacro:property name="ns" value="None" scope="parent" />
@@ -34,6 +32,14 @@
       <xacro:unless value="${robot_namespace == ''}">
         <xacro:property name="ns" value="${robot_namespace}" scope="parent" />
       </xacro:unless>
+
+      <xacro:if value="${'device_namespace' in component}">
+        <xacro:property name="device_namespace" value="${component['device_namespace']}" scope="parent" />
+      </xacro:if>
+      <xacro:unless value="${'device_namespace' in component}">
+        <xacro:property name="device_namespace" value="" scope="parent" />
+      </xacro:unless>
+
 
       <xacro:if value="${type == 'ANT02'}">
         <xacro:include
@@ -53,6 +59,10 @@
         <xacro:include
           filename="$(find ros_components_description)/urdf/orbbec_astra.urdf.xacro"
           ns="camera" />
+
+        <xacro:if value="${device_namespace == ''}">
+          <xacro:property name="device_namespace" value="camera" scope="parent" />
+        </xacro:if>
 
         <xacro:camera.orbbec_astra
           parent_link="${parent_link}"
@@ -74,6 +84,10 @@
         <xacro:include
           filename="$(find ros_components_description)/urdf/stereolabs_zed.urdf.xacro"
           ns="camera" />
+
+        <xacro:if value="${device_namespace == ''}">
+          <xacro:property name="device_namespace" value="zed" scope="parent" />
+        </xacro:if>
 
         <xacro:camera.zed_camera
           parent_link="${parent_link}"

@@ -28,10 +28,10 @@
       filename="$(find robotiq_description)/urdf/robotiq_${robotiq_type}_macro.urdf.xacro"
       ns="gripper" />
 
-    <xacro:if value="${device_namespace == 'None'}">
+    <xacro:if value="${device_namespace == ''}">
       <xacro:property name="prefix" value="" />
     </xacro:if>
-    <xacro:unless value="${device_namespace == 'None'}">
+    <xacro:unless value="${device_namespace == ''}">
       <xacro:property name="prefix" value="${device_namespace}_" />
     </xacro:unless>
 

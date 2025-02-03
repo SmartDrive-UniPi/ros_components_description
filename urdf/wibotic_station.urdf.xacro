@@ -67,15 +67,15 @@
       </inertial>
     </link>
 
-    <joint name="${prefix}wibotic_station_to_${prefix}wibotic_receiver_requested_pose_joint" type="fixed">
+    <joint name="${prefix}wibotic_station_to_${prefix}wibotic_transmitter_joint" type="fixed">
       <!-- This should be when docking is released for panther-docker
       <origin xyz="0.05 0.0 0.295" rpy="0.0 0.0 ${pi}" /> -->
-      <origin xyz="${0.05 + 0.45} 0.0 0.0" rpy="0.0 0.0 ${pi}" />
+      <origin xyz="0.05 0.0 0.5" rpy="0.0 0.0 ${pi}" />
       <parent link="${prefix}wibotic_station_link" />
-      <child link="${prefix}wibotic_receiver_requested_pose_link" />
+      <child link="${prefix}wibotic_transmitter_link" />
     </joint>
 
-    <link name="${prefix}wibotic_receiver_requested_pose_link" />
+    <link name="${prefix}wibotic_transmitter_link" />
 
   </xacro:macro>
 
@@ -152,7 +152,7 @@
 
     <xacro:property name="apriltag_size_prop" value="$(arg apriltag_size)" />
     <xacro:wibotic_station
-      device_namespace="$(arg device_namespace)" parent_link="${prefix}${name}_image_link"  xyz="0.21 0.0 0.115"
+      device_namespace="$(arg device_namespace)" parent_link="${prefix}${name}_image_link"  xyz="0.0 0.0 0.5"
       rpy="${pi} 0 0 " />
 
   </xacro:macro>
