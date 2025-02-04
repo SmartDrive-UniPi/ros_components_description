@@ -2,7 +2,7 @@
 repos:
     # Standard hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
         # mesh files has to be taken into account
@@ -24,33 +24,33 @@ repos:
 
     # Python hooks
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
+    rev: v3.19.1
     hooks:
       - id: pyupgrade
         args: [--py36-plus]
 
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 25.1.0
     hooks:
       - id: black
         args: [--line-length=99]
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.0.0
+    rev: 7.1.1
     hooks:
       - id: flake8
         args: ['--ignore=E501,W503']     # ignore too long line and line break before binary operator,
           # black checks it
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.0
     hooks:
       - id: isort
         args: [--profile, black]
 
     # CPP hooks
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v18.1.5
+    rev: v19.1.7
     hooks:
       - id: clang-format
 
@@ -90,7 +90,7 @@ repos:
 
     # XML
   - repo: https://github.com/tier4/pre-commit-hooks-ros
-    rev: v0.8.0
+    rev: v0.10.0
     hooks:
       - id: prettier-package-xml
       - id: sort-package-xml
@@ -114,7 +114,7 @@ repos:
 
     # Spellcheck
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.6
+    rev: v2.4.1
     hooks:
       - id: codespell
         args: [--write-changes, --uri-ignore-words-list=ist, -L manuel]
