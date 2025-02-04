@@ -18,9 +18,8 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <depend>depthai_descriptions</depend>
-  <!-- <depend>kortex_description</depend> NOT AVAILABLE IN ROS JAZZY -->
-  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch_ros</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch</depend>
+  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch_ros</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">nav2_common</depend>
   <depend>robotiq_description</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">ros_gz_bridge</depend>
@@ -28,6 +27,7 @@
   <depend>ur_description</depend>
   <depend>urdf</depend>
   <depend>xacro</depend>
+  <!-- <depend>kortex_description</depend> NOT AVAILABLE IN ROS JAZZY -->
 
   <test_depend>ament_cmake_pytest</test_depend>
   <test_depend>ament_index_python</test_depend>
