@@ -17,11 +17,11 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- <depend>kortex_description</depend> -->
   <depend>depthai_descriptions</depend>
+  <!-- <depend>kortex_description</depend> NOT AVAILABLE IN ROS JAZZY -->
+  <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch_ros</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">launch</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">nav2_common</depend>
-  <depend>robot_state_publisher</depend>
   <depend>robotiq_description</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">ros_gz_bridge</depend>
   <depend condition="($HUSARION_ROS_BUILD_TYPE == simulation)">ros_gz_sim</depend>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="luxonis_depthai"
+               params="parent_link
+                       xyz:='0.0 0.0 0.0'
+                       rpy:='0.0 0.0 0.0'
+                       namespace:=''
+                       device_namespace:=oak
+                       model:=OAK-D-PRO">
+
+	<xacro:include filename="$(find depthai_descriptions)/urdf/include/depthai_macro.urdf.xacro" />
+  <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
+
+	<xacro:depthai_camera camera_name="${ns}${device_namespace}" parent="${parent_link}" 
+  	base_frame="oak-d_frame" camera_model="${model}" 
+		cam_pos_x="${xyz.split()[0]}" cam_pos_y="${xyz.split()[1]}" cam_pos_z="${xyz.split()[2]}"
+		cam_roll="${rpy.split()[0]}" cam_pitch="${rpy.split()[1]}" cam_yaw="${rpy.split()[2]}" />
+
+  </xacro:macro>
+</robot>
