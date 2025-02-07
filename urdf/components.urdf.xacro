@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="create_components" params="components_config_path namespace:=''">
+  <xacro:macro name="create_components" params="components_config_path namespace:='' use_sim:='False'">
     <xacro:unless value="${components_config_path == ''}">
       <xacro:property
         name="components_config"
@@ -80,6 +80,26 @@
           namespace="${ns}"
           device_namespace="${device_ns}"
           model="${zed_models_dict[type]}"
+        />
+      </xacro:if>
+
+      <xacro:if value="${type == 'CAM11'}">
+        <xacro:include
+          filename="$(find ros_components_description)/urdf/luxonis_depthai.urdf.xacro"
+          ns="camera" />
+
+        <xacro:if value="${device_ns == ''}">
+          <xacro:property name="device_ns" value="camera" scope="parent" />
+        </xacro:if>
+
+        <xacro:camera.luxonis_depthai
+          parent_link="${parent_link}"
+          xyz="${xyz}"
+          rpy="${rpy}"
+          namespace="${ns}"
+          device_namespace="${device_ns}"
+          model="OAK-D-PRO"
+          use_sim="${use_sim}"
         />
       </xacro:if>
 
