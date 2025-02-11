@@ -4,6 +4,8 @@ URDF models of sensors and other components offered alongside with Husarion robo
 
 ## Available URDF Sensors
 
+<p align="center">
+
 | Code  | Device Name                  |
 | ----- | ---------------------------- |
 | ANT02 | Teltonika 003R-00253         |
@@ -29,6 +31,8 @@ URDF models of sensors and other components offered alongside with Husarion robo
 | MAN07 | 7DoF Kinova Gen3 + 3D vision |
 | GRP02 | Robotiq 2F-85                |
 | WCH01 | Wibotic receiver             |
+
+</p>
 
 ## Including sensor
 
