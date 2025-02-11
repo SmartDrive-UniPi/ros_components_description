@@ -25,6 +25,7 @@ from launch.actions import (
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import EnvironmentVariable, LaunchConfiguration
+from launch_ros.actions import SetParameter
 
 
 def get_value(node: yaml.Node, key: str):
@@ -81,6 +82,7 @@ def get_launch_descriptions_from_yaml_node(
         "CAM03": "stereolabs_zed",
         "CAM04": "stereolabs_zed",
         "CAM06": "stereolabs_zed",
+        "CAM11": "luxonis_depthai",
         "MAN01": "ur",
         "MAN02": "ur",
         # "MAN03": "kinova_lite"  sim_isaac error
@@ -148,6 +150,7 @@ def generate_launch_description():
     actions = [
         declare_components_config_path_arg,
         declare_namespace_arg,
+        SetParameter(name="use_sim_time", value=True),
         OpaqueFunction(function=launch_setup),
     ]
 

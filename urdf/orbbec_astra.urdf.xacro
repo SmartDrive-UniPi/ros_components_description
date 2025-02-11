@@ -88,56 +88,32 @@
 
     <link name="${device_namespace}_color_optical_frame" />
 
-    <gazebo reference="${device_namespace}_link">
-      <!-- https://github.com/orbbec/OrbbecSDK_ROS2#all-available-topics -->
-      <sensor type="camera" name="${ns}${device_namespace}_orbbec_astra_color">
-        <always_on>true</always_on>
-        <update_rate>30.0</update_rate>
+    <!-- GAZEBO -->
+    <!-- https://github.com/orbbec/OrbbecSDK_ROS2#all-available-topics -->
+    <xacro:include filename="$(find ros_components_description)/urdf/gz_sensor.urdf.xacro" ns="gz_sensor" />
 
-        <topic>${ns}${device_namespace}/color/image_raw</topic>
-        <visualize>false</visualize>
+    <xacro:gz_sensor.camera
+      reference="${device_namespace}_link"
+      name="${ns}${device_namespace}_orbbec_astra_color"
+      topic="${ns}${device_namespace}/color/image_raw"
+      frame_id="${ns}${device_namespace}_color_optical_frame"
+      frequency="30"
+      width="640"
+      height="480"
+      fov="${60.0/180.0*pi}" />
 
-        <gz_frame_id>${ns}${device_namespace}_color_optical_frame</gz_frame_id>
-        <horizontal_fov>${60.0/180.0*pi}</horizontal_fov>
-        <image>
-          <width>640</width>
-          <height>480</height>
-        </image>
-
-        <clip>
-          <near>0.6</near>
-          <far>8.0</far>
-        </clip>
-      </sensor>
-
-      <sensor type="depth_camera" name="${ns}${device_namespace}_orbbec_astra_depth">
-        <always_on>true</always_on>
-        <update_rate>10.0</update_rate>
-
-
-        <topic>${ns}${device_namespace}/depth/image_raw</topic>
-        <visualize>false</visualize>
-
-        <gz_frame_id>${ns}${device_namespace}_depth_optical_frame</gz_frame_id>
-        <camera>
-          <horizontal_fov>${60.0/180.0*pi}</horizontal_fov>
-          <image>
-            <width>640</width>
-            <height>480</height>
-          </image>
-
-          <clip>
-            <near>0.6</near>
-            <far>8.0</far>
-          </clip>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.005</stddev>
-          </noise>
-        </camera>
-      </sensor>
-    </gazebo>
+    <xacro:gz_sensor.depth_camera
+      reference="${device_namespace}_link"
+      name="${ns}${device_namespace}_orbbec_astra_depth"
+      topic="${ns}${device_namespace}/depth/image_raw"
+      frame_id="${ns}${device_namespace}_depth_optical_frame"
+      frequency="30"
+      width="640"
+      height="480"
+      fov="${60.0/180.0*pi}"
+      min_dist="0.6"
+      max_dist="8.0"
+      stddev_error="0.05" />
 
   </xacro:macro>
 </robot>

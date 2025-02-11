@@ -89,7 +89,7 @@
           ns="camera" />
 
         <xacro:if value="${device_ns == ''}">
-          <xacro:property name="device_ns" value="camera" scope="parent" />
+          <xacro:property name="device_ns" value="oak" scope="parent" />
         </xacro:if>
 
         <xacro:camera.luxonis_depthai

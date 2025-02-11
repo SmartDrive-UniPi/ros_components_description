@@ -5,18 +5,43 @@
                        xyz:='0.0 0.0 0.0'
                        rpy:='0.0 0.0 0.0'
                        namespace:=''
-                       device_namespace:=oak
-                       model:=OAK-D-PRO
+                       device_namespace:='oak'
+                       model:='OAK-D-PRO'
                        use_sim:=False">
 
 	<xacro:include filename="$(find depthai_descriptions)/urdf/include/depthai_macro.urdf.xacro" />
   <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
 
 	<xacro:depthai_camera camera_name="${ns}${device_namespace}" parent="${parent_link}"
-  	base_frame="oak-d_frame" camera_model="${model}"
+  	base_frame="${ns}${device_namespace}" camera_model="${model}"
 		cam_pos_x="${xyz.split()[0]}" cam_pos_y="${xyz.split()[1]}" cam_pos_z="${xyz.split()[2]}"
 		cam_roll="${rpy.split()[0]}" cam_pitch="${rpy.split()[1]}" cam_yaw="${rpy.split()[2]}" 
     simulation="${use_sim}" />
+
+  <xacro:include filename="$(find ros_components_description)/urdf/gz_sensor.urdf.xacro" ns="gz_sensor" />
+
+  <xacro:gz_sensor.camera
+    reference="${ns}${device_namespace}"
+    name="${ns}${device_namespace}_color"
+    topic="${ns}${device_namespace}/rgb/color"
+    frame_id="${ns}${device_namespace}_rgb_camera_frame"
+    frequency="30"
+    width="1280"
+    height="720"
+    fov="${60.0/180.0*pi}" />
+
+  <xacro:gz_sensor.depth_camera
+    reference="${ns}${device_namespace}"
+    name="${ns}${device_namespace}_depth"
+    topic="${ns}${device_namespace}/stereo/depth"
+    frame_id="${ns}${device_namespace}_rgb_camera_frame"
+    frequency="30"
+    width="1280"
+    height="720"
+    fov="${60.0/180.0*pi}"
+    min_dist="1.0"
+    max_dist="12.0"
+    stddev_error="0.2" />
 
   </xacro:macro>
 </robot>

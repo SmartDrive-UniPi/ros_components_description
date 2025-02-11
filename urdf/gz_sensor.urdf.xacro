@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="camera" params="reference name topic frame_id frequency width height fov">
+    <gazebo reference="${reference}">
+      <sensor type="camera" name="${name}">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+
+        <topic>${topic}</topic>
+        <gz_frame_id>${frame_id}</gz_frame_id>
+        <update_rate>${frequency}</update_rate>
+        
+        <camera>
+          <horizontal_fov>${fov}</horizontal_fov>
+
+          <image>
+            <width>${width}</width>
+            <height>${height}</height>
+          </image>
+        </camera>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="depth_camera" params="reference name topic frame_id frequency width height fov min_dist max_dist stddev_error">
+    <gazebo reference="${reference}">
+      <sensor type="depth_camera" name="${name}">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+
+        <topic>${topic}</topic>
+        <gz_frame_id>${frame_id}</gz_frame_id>
+        <update_rate>${frequency}</update_rate>
+
+        <camera>
+          <optical_frame_id>${frame_id}</optical_frame_id>
+          <horizontal_fov>${fov}</horizontal_fov>
+
+          <image>
+            <width>${width}</width>
+            <height>${height}</height>
+            <format>R_FLOAT32</format>
+          </image>
+        </camera>
+        
+        <depth_camera>
+          <optical_frame_id>${frame_id}</optical_frame_id>
+          <clip>
+            <near>${min_dist}</near>
+            <far>${max_dist}</far>
+          </clip>
+
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${stddev_error}</stddev>
+          </noise>
+        </depth_camera>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="rgbd_camera" params="reference name topic frame_id frequency width height fov min_dist max_dist stddev_error">
+    <gazebo reference="${reference}">
+      <sensor type="rgbd_camera" name="${name}">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+
+        <topic>${topic}</topic>
+        <update_rate>${frequency}</update_rate>
+
+        <camera>
+          <optical_frame_id>${frame_id}</optical_frame_id>
+          <horizontal_fov>${fov}</horizontal_fov>
+          <image>
+            <width>${width}</width>
+            <height>${height}</height>
+          </image>
+        </camera>
+
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

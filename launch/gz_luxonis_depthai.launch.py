@@ -25,14 +25,14 @@ from launch.substitutions import EnvironmentVariable, LaunchConfiguration, Pytho
 def generate_launch_description():
     ros_components_description = get_package_share_directory("ros_components_description")
     gz_bridge_config_path = os.path.join(
-        ros_components_description, "config", "gz_orbbec_astra_remappings.yaml"
+        ros_components_description, "config", "gz_luxonis_depthai_remappings.yaml"
     )
 
     robot_namespace = LaunchConfiguration("robot_namespace")
     device_namespace = LaunchConfiguration("device_namespace")
     gz_bridge_name = LaunchConfiguration("gz_bridge_name")
 
-    device_namespace = PythonExpression(["'' if '", device_namespace, "' else 'camera'"])
+    device_namespace = PythonExpression(["'' if '", device_namespace, "' else 'oak'"])
 
     namespaced_gz_bridge_config_path = ReplaceString(
         source_file=gz_bridge_config_path,
@@ -44,7 +44,7 @@ def generate_launch_description():
 
     declare_device_namespace = DeclareLaunchArgument(
         "device_namespace",
-        default_value="",
+        default_value="oak",
         description="Sensor namespace that will appear before all non absolute topics and TF frames, used for distinguishing multiple cameras on the same robot.",
     )
 

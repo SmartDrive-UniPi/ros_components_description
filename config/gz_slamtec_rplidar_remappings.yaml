@@ -3,3 +3,4 @@
     ros_type_name: sensor_msgs/msg/LaserScan
     gz_type_name: gz.msgs.LaserScan
     lazy: true
+    direction: GZ_TO_ROS
