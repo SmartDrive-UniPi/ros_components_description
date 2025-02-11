@@ -4,7 +4,7 @@ URDF models of sensors and other components offered alongside with Husarion robo
 
 ## Available URDF Sensors
 
-<p align="center">
+<div align="center">
 
 | Code  | Device Name                  |
 | ----- | ---------------------------- |
@@ -32,7 +32,7 @@ URDF models of sensors and other components offered alongside with Husarion robo
 | GRP02 | Robotiq 2F-85                |
 | WCH01 | Wibotic receiver             |
 
-</p>
+</div>
 
 ## Including sensor
 
