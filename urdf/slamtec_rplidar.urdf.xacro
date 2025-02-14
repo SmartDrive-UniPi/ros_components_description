@@ -18,7 +18,7 @@
       <xacro:property name="dist_max" value="40.0" />
       <xacro:property name="dist_res" value="0.01" />
       <xacro:property name="std_dev" value="0.03" />
-      <xacro:property name="mesh" value="slamtec_rplidar_s3.dae" />
+      <xacro:property name="mesh" value="s3.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.0413/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -44,7 +44,7 @@
       <xacro:property name="dist_max" value="30.0" />
       <xacro:property name="dist_res" value="0.013" />
       <xacro:property name="std_dev" value="0.03" />
-      <xacro:property name="mesh" value="slamtec_rplidar_s2.dae" />
+      <xacro:property name="mesh" value="s2.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.038857/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -70,7 +70,7 @@
       <xacro:property name="dist_max" value="40.0" />
       <xacro:property name="dist_res" value="0.03" />
       <xacro:property name="std_dev" value="0.05" />
-      <xacro:property name="mesh" value="slamtec_rplidar_s1.dae" />
+      <xacro:property name="mesh" value="s1.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.0195/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -96,7 +96,7 @@
       <xacro:property name="dist_max" value="25.0" />
       <xacro:property name="dist_res" value="0.03" />
       <xacro:property name="std_dev" value="0.05" />
-      <xacro:property name="mesh" value="slamtec_rplidar_ax.dae" />
+      <xacro:property name="mesh" value="ax.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.041/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -122,7 +122,7 @@
       <xacro:property name="dist_max" value="12.0" />
       <xacro:property name="dist_res" value="0.03" />
       <xacro:property name="std_dev" value="0.05" />
-      <xacro:property name="mesh" value="slamtec_rplidar_ax.dae" />
+      <xacro:property name="mesh" value="ax.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.041/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -147,7 +147,7 @@
       <xacro:property name="dist_max" value="10.0" />
       <xacro:property name="dist_res" value="0.03" />
       <xacro:property name="std_dev" value="0.05" />
-      <xacro:property name="mesh" value="slamtec_rplidar_a2m8.dae" />
+      <xacro:property name="mesh" value="a2m8.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.041/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -172,7 +172,7 @@
       <xacro:property name="dist_max" value="10.0" />
       <xacro:property name="dist_res" value="0.03" />
       <xacro:property name="std_dev" value="0.05" />
-      <xacro:property name="mesh" value="slamtec_rplidar_ax.dae" />
+      <xacro:property name="mesh" value="ax.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.041/2.0}" rpy="0.0 0.0 0.0" />
         <geometry>
@@ -201,7 +201,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
         <geometry>
-          <mesh filename="package://ros_components_description/meshes/${mesh}" />
+          <mesh filename="package://ros_components_description/meshes/rplidar/${mesh}" />
         </geometry>
       </visual>
 
