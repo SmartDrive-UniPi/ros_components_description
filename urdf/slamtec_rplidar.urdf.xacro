@@ -17,7 +17,7 @@
       <xacro:property name="dist_min" value="0.05" />
       <xacro:property name="dist_max" value="40.0" />
       <xacro:property name="dist_res" value="0.01" />
-      <xacro:property name="std_dev" value="0.03" />
+      <xacro:property name="std_dev" value="0.015" />
       <xacro:property name="mesh" value="s3.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.0413/2.0}" rpy="0.0 0.0 0.0" />
@@ -43,7 +43,7 @@
       <xacro:property name="dist_min" value="0.05" />
       <xacro:property name="dist_max" value="30.0" />
       <xacro:property name="dist_res" value="0.013" />
-      <xacro:property name="std_dev" value="0.03" />
+      <xacro:property name="std_dev" value="0.015" />
       <xacro:property name="mesh" value="s2.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 ${0.038857/2.0}" rpy="0.0 0.0 0.0" />
@@ -69,7 +69,7 @@
       <xacro:property name="dist_min" value="0.04" />
       <xacro:property name="dist_max" value="40.0" />
       <xacro:property name="dist_res" value="0.03" />
-      <xacro:property name="std_dev" value="0.05" />
+      <xacro:property name="std_dev" value="0.025" />
       <xacro:property name="mesh" value="s1.dae" />
       <xacro:property name="collision">
         <origin xyz="0.0 0.0 0.025" rpy="0.0 0.0 0.0" />
