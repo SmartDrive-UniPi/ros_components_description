@@ -27,6 +27,17 @@ xacro_path = os.path.join(ros_components_description, "test/component.urdf.xacro
 
 # Type: [device_namespace, link_name, sensor_link_name, sensor_name, default_device_namespace]
 components_types_with_names = {
+    "DEV01": ["", "dev01_link", "", "", ""],
+    "DEV02": ["", "dev02_link", "", "", ""],
+    "DEV03": ["", "dev03_link", "", "", ""],
+    "DEV03": ["", "dev03_link", "", "", ""],
+    "DEV04H": ["", "dev04h_link", "", "", ""],
+    "DEV04L": ["", "dev04l_link", "", "", ""],
+    "DEV05": ["", "dev05_link", "", "", ""],
+    "DEV06": ["", "dev06_link", "", "", ""],
+    "DEV07": ["", "dev07_link", "", "", ""],
+    "DEV07T": ["", "dev07t_link", "", "", ""],
+    "DEV09": ["", "dev09_link", "", "", ""],
     "LDR01": ["slamtec_rplidar_s1", "laser", "laser", "slamtec_rplidar_sensor", ""],
     "LDR06": ["slamtec_rplidar_s3", "laser", "laser", "slamtec_rplidar_sensor", ""],
     "LDR10": ["ouster_os0_32", "os_lidar", "os_lidar", "ouster_os0_32_sensor", ""],
@@ -176,8 +187,14 @@ class ComponentsYamlParseUtils:
 def test_all_good_single_components(tmpdir_factory):
     for type_name, value in components_types_with_names.items():
         device_namespace = value[0]
-        dir = tmpdir_factory.mktemp(device_namespace)
-        components_config_path = dir.join(device_namespace + "_test_components.yaml")
+        folder_name = device_namespace
+
+        if "DEV" in type_name :
+            folder_name = type_name
+
+
+        dir = tmpdir_factory.mktemp(folder_name)
+        components_config_path = dir.join(folder_name + "_test_components.yaml")
 
         utils = ComponentsYamlParseUtils(str(components_config_path))
         components = {
