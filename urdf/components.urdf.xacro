@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
   <xacro:macro name="create_components"
-    params="components_config_path namespace">
+    params="components_config_path namespace use_sim:=false">
 
     <xacro:unless value="${components_config_path == 'None'}">
       <xacro:property name="components_config"
@@ -10,13 +10,14 @@
       <xacro:load_componenet
         config="${components_config}"
         counter="${len(components_config['components'])}"
-        robot_namespace="${namespace}" />
+        robot_namespace="${namespace}"
+        use_sim="${use_sim}" />
 
     </xacro:unless>
   </xacro:macro>
 
   <xacro:macro name="load_componenet"
-    params="config counter robot_namespace">
+    params="config counter robot_namespace use_sim:=false">
     <xacro:if value="${counter}">
       <xacro:property name="index" value="${counter - 1}" scope="parent" />
       <xacro:property name="component" value="${config['components'][index]}" scope="parent" />
@@ -100,6 +101,25 @@
             rpy="${rpy}"
             namespace="${ns}"
             device_namespace="${device_namespace}"
+          />
+        </xacro:if>
+
+        <xacro:if value="${type == 'CAM02'}">
+          <xacro:include
+            filename="$(find ros_components_description)/urdf/intel_realsense_d435.urdf.xacro"
+            ns="camera" />
+
+          <xacro:if value="${device_namespace == ''}">
+            <xacro:property name="device_namespace" value="camera" scope="parent" />
+          </xacro:if>
+
+          <xacro:camera.intel_realsense_d435
+            parent_link="${parent_link}"
+            xyz="${xyz}"
+            rpy="${rpy}"
+            namespace="${ns}"
+            device_namespace="${device_namespace}"
+            use_nominal_extrinsics="${use_sim}"
           />
         </xacro:if>
 
