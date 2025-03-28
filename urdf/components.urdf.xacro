@@ -140,6 +140,7 @@
           </xacro:if>
 
           <xacro:camera.zed_camera
+
             parent_link="${parent_link}"
             xyz="${xyz}"
             rpy="${rpy}"
@@ -180,6 +181,7 @@
           ('LDR14', 'os1_64'),
           ('LDR15', 'os1_128')
         ])}" />
+
 
         <xacro:if value="${type in ouster_models_dict}">
           <xacro:include
