@@ -5,17 +5,19 @@ on:
   - push
 
 jobs:
-  colcon-test-build-ubuntu-22-04:
+  colcon-test-build:
     strategy:
       matrix:
-        ros-distro: [humble]
+        ros-distro: [jazzy]
     runs-on: ubuntu-22.04
 
     name: Build ${{ matrix.ros-distro }}
     steps:
+
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: ${{ matrix.ros-distro }}
+
       - uses: ros-tooling/action-ros-ci@v0.3
         with:
           package-name: ros_components_description
