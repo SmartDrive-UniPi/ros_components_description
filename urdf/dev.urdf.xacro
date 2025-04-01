@@ -3,12 +3,7 @@
   <xacro:macro name="dev"
                params="namespace:=None model:=dev01">
 
-    <xacro:if value="${namespace == 'None'}">
-      <xacro:property name="ns" value="" />
-    </xacro:if>
-    <xacro:unless value="${namespace == 'None'}">
-      <xacro:property name="ns" value="${namespace}/" />
-    </xacro:unless>
+    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
 
     <xacro:if value="${model == 'dev01'}">
       <xacro:property name="parent_link" value="base_link" scope="parent" />
