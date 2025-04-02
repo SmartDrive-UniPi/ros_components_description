@@ -11,7 +11,7 @@
     </xacro:unless>
 
     <xacro:if value="${model == 'dev01'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <!-- 0.0001 in z is to cover the base. -->
       <xacro:property name="xyz" value="0 0 0.0001"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${pi/2.0}" scope="parent" />
@@ -23,7 +23,7 @@
     </xacro:if>
 
     <xacro:if value="${model == 'dev02'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
@@ -34,7 +34,7 @@
 
 
     <xacro:if value="${model == 'dev03'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
@@ -44,7 +44,7 @@
     </xacro:if>
 
     <xacro:if value="${model == 'dev04l'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
@@ -54,7 +54,7 @@
     </xacro:if>
 
     <xacro:if value="${model == 'dev04h'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
@@ -69,13 +69,13 @@
       <xacro:property name="xyz" value="-0.185 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
-      <xacro:property name="collision_box_size" value="0.028 0.12 0.35"      scope="parent" />
+      <xacro:property name="collision_box_size" value="0.028 0.04 0.35"      scope="parent" />
       <xacro:property name="collision_box_rpy"  value="0 0 ${-pi/2.0}"      scope="parent" />
       <xacro:property name="collision_box_xyz"  value="0 0 0.175"      scope="parent" />
     </xacro:if>
 
     <xacro:if value="${model == 'dev06'}">
-      <xacro:property name="parent_link" value="base_link" scope="parent" />
+      <xacro:property name="parent_link" value="body_link" scope="parent" />
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
@@ -89,7 +89,7 @@
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 ${-pi/2.0}" scope="parent" />
 
-      <xacro:property name="collision_box_size" value="0.175 0.525 0.14"      scope="parent" />
+      <xacro:property name="collision_box_size" value="0.175 0.525 0.143"      scope="parent" />
       <xacro:property name="collision_box_rpy"  value="0 0 ${-pi/2.0}"      scope="parent" />
       <xacro:property name="collision_box_xyz"  value="0 0 0.07"      scope="parent" />
     </xacro:if>
@@ -99,7 +99,7 @@
       <xacro:property name="xyz" value="0 0 0"  scope="parent" />
       <xacro:property name="rpy" value="0 0 0" scope="parent" />
 
-      <xacro:property name="collision_box_size" value="0.175 0.4 0.14"      scope="parent" />
+      <xacro:property name="collision_box_size" value="0.175 0.4 0.143"      scope="parent" />
       <xacro:property name="collision_box_rpy"  value="0 0 ${-pi/2.0}"      scope="parent" />
       <xacro:property name="collision_box_xyz"  value="0 0 0.07"      scope="parent" />
     </xacro:if>
