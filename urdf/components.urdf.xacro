@@ -135,7 +135,13 @@
           />
         </xacro:if>
 
-        <xacro:if value="${type == 'CAM11'}">
+        <!-- 'CAM10', 'OAK-1-LITE' is not available in luxonis repo -->
+        <xacro:property name="luxonis_models_dict"
+          value="${dict ([
+          ('CAM11', 'OAK-D-PRO'),
+          ])}" />
+
+        <xacro:if value="${type in luxonis_models_dict}">
           <xacro:include
             filename="$(find ros_components_description)/urdf/luxonis_depthai.urdf.xacro"
             ns="camera" />
@@ -150,7 +156,7 @@
             rpy="${rpy}"
             namespace="${ns}"
             device_namespace="${device_ns}"
-            model="OAK-D-PRO"
+            model="${luxonis_models_dict[type]}"
             use_sim="${use_sim}"
           />
         </xacro:if>
@@ -158,6 +164,9 @@
         <xacro:property name="rplidar_models_dict"
           value="${dict ([
           ('LDR01', 's1'),
+          ('LDR02', 's2'),
+          ('LDR03', 'a2m12'),
+          ('LDR04', 'a3'),
           ('LDR06', 's3'),
         ])}" />
 
