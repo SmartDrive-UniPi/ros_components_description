@@ -50,7 +50,7 @@ components_types_with_names = {
     "CAM01": ["orbbec_astra", "link", "link", "orbbec_astra_color", "camera"],
     "CAM03": ["zed2", "center", "center", "stereolabs_zed_depth", "zed"],
     "CAM04": ["zed2i", "center", "center", "stereolabs_zed_depth", "zed"],
-    "CAM06": ["zedi", "center", "center", "stereolabs_zed_depth", "zed"],
+    "CAM06": ["zedx", "center", "center", "stereolabs_zed_depth", "zed"],
     "MAN01": ["ur3e", "base_link", "", "", ""],
     "MAN02": ["ur5e", "base_link", "", "", ""],
     # "MAN03": ["kinova_lite",               "base_link",    "",         "",""], use_isaac error

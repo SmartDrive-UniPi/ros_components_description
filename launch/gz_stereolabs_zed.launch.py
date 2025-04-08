@@ -45,7 +45,7 @@ def fix_depth_image_tf(context, *args, **kwargs):
         executable="static_transform_publisher",
         name="point_cloud_tf",
         output="log",
-        arguments=["0", "0", "0", "0", "0", "0", parent_frame, child_frame],
+        arguments=["0", "0", "0", "1.57", "-1.57", "0", parent_frame, child_frame],
         parameters=[{"use_sim_time": True}],
         namespace=robot_namespace,
     )

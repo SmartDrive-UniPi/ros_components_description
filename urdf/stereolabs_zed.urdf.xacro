@@ -203,7 +203,9 @@
           </clip>
         </camera>
       </sensor>
+  </gazebo>
 
+  <gazebo reference="${device_namespace}_center">
       <sensor type="depth_camera" name="${ns}${device_namespace}_stereolabs_zed_depth">
         <always_on>true</always_on>
         <update_rate>30.0</update_rate>
@@ -217,6 +219,11 @@
           <image>
             <width>1920</width>
             <height>1080</height>
+
+            <!-- Better pointclound performance -->
+            <!-- <width>160</width>
+            <height>100</height> -->
+
             <format>R_FLOAT32</format>
           </image>
           <clip>

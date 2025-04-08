@@ -5,15 +5,17 @@
   <version>0.0.1</version>
 
   <description>URDF descriptions of components offered with Husarion robots</description>
-  <license>Apache License 2.0</license>
-
-  <author email="krzysztof.wojciechowski@husarion.com">Krzysztof Wojciechowski</author>
-  <author email="pawel.kowalski@husarion.com">Pawel Kowalski</author>
   <maintainer email="support@husarion.com">Husarion</maintainer>
+  <license>Apache License 2.0</license>
 
   <url type="website">https://husarion.com</url>
   <url type="repository">https://github.com/husarion/ros_components_description/</url>
   <url type="bugtracker">https://github.com/husarion/ros_components_description/issues</url>
+
+  <author email="jakub.delikat@husarion.com">Jakub Delikat</author>
+  <author email="rafal.gorecki@husarion.com">Rafal Gorecki</author>
+  <author email="pawel.kowalski@husarion.com">Pawel Kowalski</author>
+  <author email="krzysztof.wojciechowski@husarion.com">Krzysztof Wojciechowski</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
