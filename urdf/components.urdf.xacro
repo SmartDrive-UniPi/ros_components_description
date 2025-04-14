@@ -157,7 +157,6 @@
             namespace="${ns}"
             device_namespace="${device_ns}"
             model="${luxonis_models_dict[type]}"
-            use_sim="${use_sim}"
           />
         </xacro:if>
 
