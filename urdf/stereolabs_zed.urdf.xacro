@@ -93,7 +93,7 @@
         <!-- 0.02 in x is caused because the visual model is in the frame -->
         <origin xyz="${screw_offset_x-0.02} 0 ${screw_offset_z}" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://ros_components_description/meshes/${model}.stl" />
+          <mesh filename="package://ros_components_description/meshes/stereolabs/${model}.stl" />
         </geometry>
         <material name="mat">
           <color rgba="0.25 0.25 0.25 0.99" />
@@ -101,7 +101,7 @@
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://ros_components_description/meshes/${model}.stl" />
+          <mesh filename="package://ros_components_description/meshes/stereolabs/${model}.stl" />
         </geometry>
       </collision>
     </link>
