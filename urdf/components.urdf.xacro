@@ -24,11 +24,7 @@
       <xacro:property name="component" value="${config['components'][index]}" scope="parent" />
 
       <xacro:property name="type" value="${component['type']}" scope="parent" />
-      <xacro:property name="parent_link" value="${component['parent_link']}" scope="parent" />
       <xacro:property name="ns" value="${robot_namespace}" scope="parent" />
-      <xacro:property name="xyz" value="${component['xyz'] if 'xyz' in component else '0.0 0.0 0.0'}" scope="parent" />
-      <xacro:property name="rpy" value="${component['rpy'] if 'rpy' in component else '0.0 0.0 0.0'}" scope="parent" />
-      <xacro:property name="device_ns" value="${component['device_namespace'] if 'device_namespace' in component else ''}" scope="parent" />
 
       <xacro:property name="dev_models_dict"
         value="${dict ([
@@ -56,6 +52,10 @@
       </xacro:if>
 
       <xacro:unless value="${type in dev_models_dict}">
+        <xacro:property name="parent_link" value="${component['parent_link']}" scope="parent" />
+        <xacro:property name="xyz" value="${component['xyz'] if 'xyz' in component else '0.0 0.0 0.0'}" scope="parent" />
+        <xacro:property name="rpy" value="${component['rpy'] if 'rpy' in component else '0.0 0.0 0.0'}" scope="parent" />
+        <xacro:property name="device_ns" value="${component['device_namespace'] if 'device_namespace' in component else ''}" scope="parent" />
 
         <xacro:if value="${type == 'ANT02'}">
           <xacro:include
