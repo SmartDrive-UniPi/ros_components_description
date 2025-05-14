@@ -46,7 +46,6 @@
           ns="dev"
         />
         <xacro:dev.dev
-          namespace="${ns}"
           model="${dev_models_dict[type]}"
         />
       </xacro:if>
