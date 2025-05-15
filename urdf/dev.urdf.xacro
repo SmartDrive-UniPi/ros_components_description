@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="dev"
-               params="namespace:=None model:=dev01">
-
-    <xacro:property name="ns" value="${namespace + '/' if namespace != '' else ''}" />
+               params="model:=dev01">
 
     <xacro:if value="${model == 'dev01'}">
       <xacro:property name="parent_link" value="body_link" scope="parent" />
@@ -109,13 +107,13 @@
       <xacro:property name="collision_box_xyz"  value="0 0 0.125"      scope="parent" />
     </xacro:if>
 
-    <joint name="${ns}${model}_joint" type="fixed">
+    <joint name="${model}_joint" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
       <parent link="${parent_link}" />
-      <child link="${ns}${model}_link" />
+      <child link="${model}_link" />
     </joint>
 
-    <link name="${ns}${model}_link">
+    <link name="${model}_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
